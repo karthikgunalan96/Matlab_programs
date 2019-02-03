@@ -1,0 +1,14 @@
+c=-(1/12)+(pi/6)*1i;
+k=2;
+n=0:40;
+x=k*exp(c*n);
+subplot(2,1,1);
+stem(n,real(x));
+xlabel('t');
+ylabel('A');
+title('real part');
+subplot(2,1,2);
+stem(n,imag(x));
+xlabel('t');
+ylabel('A');
+title('imaginary part');

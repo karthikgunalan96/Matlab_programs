@@ -1,0 +1,24 @@
+Fs=input('enter the sampling freq of the sine signal(hz): ');
+amp=input('enter the amplitude of the sine signal: ');
+f=input('freq of sine signal:');
+phase=input('phase of the sine signal: ');
+Ts=1/Fs;
+t=0:Ts:10;
+randn('state',0);
+y=amp*sin((2*3.14*f*t)+phase)+0.5*randn(size(t));
+
+fp=input('pass band freq');
+fs=input('stop band freq');
+rp=input('pass band attenuation rp=');
+rs=input('stop band attenuation rs=');
+f=input('sampling freq');
+wp=2*fp/f;
+ws=2*fs/f;
+[n,wn]=buttord(wp,ws,rp,rs);
+disp('filter order n=');
+[b,a]=butter(n,wn,'high');
+z=filtfilt(b,a,y);
+subplot(2,1,1),plot(y),title('signal with noise');
+subplot(2,1,2),plot(z),title('filtered sine signal');
+figure,plot([b,a]),title('butterworth highpass iit filter coefficient');
+figure,freqz(b,a,500,f);
